@@ -1,5 +1,5 @@
 # Difference with default Doxyfile 1.11.0
-PROJECT_NAME           = "nice man pages from doxygen"
+PROJECT_NAME           = "Nice Man Pages From Doxygen"
 PROJECT_NUMBER         = 0.1
 ABBREVIATE_BRIEF       =
 OUTPUT_DIRECTORY       = .
