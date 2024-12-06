@@ -1,12 +1,12 @@
 # Difference with default Doxyfile 1.11.0
-PROJECT_NAME           = "man page demo"
+PROJECT_NAME           = "nice man pages from doxygen"
 PROJECT_NUMBER         = 0.1
 ABBREVIATE_BRIEF       =
 OUTPUT_DIRECTORY       = .
 TAB_SIZE               = 2
 OPTIMIZE_OUTPUT_FOR_C  = YES
 QUIET                  = YES
-INPUT                  = /home/dunc/tests/doxygen/defbug
+INPUT                  = /usr/src/NMPFD
 FILE_PATTERNS          = *.c *.h
 EXCLUDE_SYMBOLS        = list_head
 EXAMPLE_PATTERNS       = 
