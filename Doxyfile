@@ -1,0 +1,20 @@
+# Difference with default Doxyfile 1.11.0
+PROJECT_NAME           = "man page demo"
+PROJECT_NUMBER         = 0.1
+ABBREVIATE_BRIEF       =
+OUTPUT_DIRECTORY       = .
+TAB_SIZE               = 2
+OPTIMIZE_OUTPUT_FOR_C  = YES
+QUIET                  = YES
+INPUT                  = /home/dunc/tests/doxygen/defbug
+FILE_PATTERNS          = *.c *.h
+EXCLUDE_SYMBOLS        = list_head
+EXAMPLE_PATTERNS       = 
+INPUT_FILTER           = "sed -E '/^static inline [^ ]* [^_]{2}/s/static //'"
+SOURCE_BROWSER         = YES
+ALPHABETICAL_INDEX     = NO
+SEARCHENGINE           = NO
+GENERATE_LATEX         = NO
+GENERATE_MAN           = YES
+MAN_LINKS              = YES
+QUIET                  = YES
