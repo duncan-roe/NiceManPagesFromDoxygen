@@ -29,8 +29,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 /**
  * \defgroup Stack Singly-linked list stack implementation
  *
- * This file contains macros to manipulate a singly-linked list as a stack.
+ * This file contains macros to manipulate a singly-linked list of structures
+ * as a stack.
  * To use utstack, your structure must have a "next" pointer.
+ * If this pointer is called something other than "next" then you need to use
+ * the macros with names ending <b>2</b>.
  *
  * <h1>Example</h1>
  *
@@ -75,36 +78,77 @@ int main() {
 #define STACK_TOP(head) (head)
 
 /**
- * @}
+ * STACK_EMPTY - check for empty stack
+ * \param head Stack address
+ *
+ * \return 0 iff stack empty
  */
-
 #define STACK_EMPTY(head) (!(head))
 
-#define STACK_PUSH(head,add)                                         \
+/**
+ * STACK_PUSH - add an item to a stack
+ * \param head Stack address
+ * \param add pointer to new item
+ */
+#define STACK_PUSH(head,add) \
     STACK_PUSH2(head,add,next)
 
-#define STACK_PUSH2(head,add,next)                                   \
-do {                                                                 \
-  (add)->next = (head);                                              \
-  (head) = (add);                                                    \
+/**
+ * STACK_PUSH2 - add a sructure to a stack
+ * \param head Stack address
+ * \param add pointer to new structure
+ * \param next name of "next" pointer in structure
+ */
+#define STACK_PUSH2(head,add,next) \
+do { \
+  (add)->next = (head); \
+  (head) = (add); \
 } while (0)
 
-#define STACK_POP(head,result)                                       \
+/**
+ * STACK_POP - pop an item off a stack
+ * \param head Stack address
+ * \param result returned pointer to popped item
+ */
+#define STACK_POP(head,result) \
     STACK_POP2(head,result,next)
 
-#define STACK_POP2(head,result,next)                                 \
-do {                                                                 \
-  (result) = (head);                                                 \
-  (head) = (head)->next;                                             \
+/**
+ * STACK_POP2 - pop an item off a stack
+ * \param head Stack address
+ * \param result returned pointer to popped item
+ * \param next name of "next" pointer in structure
+ */
+#define STACK_POP2(head,result,next) \
+do { \
+  (result) = (head); \
+  (head) = (head)->next; \
 } while (0)
 
-#define STACK_COUNT(head,el,counter)                                 \
-    STACK_COUNT2(head,el,counter,next)                               \
+/**
+ * STACK_COUNT - Count the number of items in a stack
+ * \param head Stack address
+ * \param el Temporary pointer to a stack element for use by the macro
+ * \param counter returned count of items in head
+ */
+#define STACK_COUNT(head,el,counter) \
+    STACK_COUNT2(head,el,counter,next)
 
-#define STACK_COUNT2(head,el,counter,next)                           \
-do {                                                                 \
-  (counter) = 0;                                                     \
-  for ((el) = (head); el; (el) = (el)->next) { ++(counter); }        \
+/**
+ * STACK_COUNT2 - Count the number of items in a stack
+ * \param head Stack address
+ * \param el Temporary pointer to a stack element for use by the macro
+ * \param counter returned count of items in head
+ * \param next name of "next" pointer in structure
+ */
+#define STACK_COUNT2(head,el,counter,next) \
+do { \
+  (counter) = 0; \
+  for ((el) = (head); el; (el) = (el)->next) { ++(counter); } \
 } while (0)
+
+/**
+ * @}
+ */
 
 #endif /* UTSTACK_H */
