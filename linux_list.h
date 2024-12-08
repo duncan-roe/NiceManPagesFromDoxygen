@@ -23,14 +23,16 @@
  */
 
 /**
- * \defgroup List Circular doubly linked list implementation
+ * \defgroup List Circular Simple doubly linked list implementation
  *
- * Unlike file units (which are re-used), network interface indicies
- * increase monotonically as they are brought up and down.
- *
- * To keep memory usage predictable as indices increase,
- * the nlif_* functions keep their data in a circular list
- * (in fact a number of lists, to minimise search times).
+ * File <a class="el" href="linux__list_8h_source.html">linux_list.h</a>
+ * contains both functions and macros.
+ * The functions are declared `static inline` but are documented via the
+ * \b INPUT_FILTER in Doxyfile:
+ * \dontinclude Doxyfile
+ * \skipline INPUT_FILTER
+ * \until internal
+ * \skipline INPUT_FILTER
  *
  * \manonly
 .SH SYNOPSIS
@@ -53,16 +55,6 @@
 #define container_of(ptr, type, member) ({			\
 	typeof( ((type *)0)->member ) *__mptr = (ptr);	\
 	(type *)( (char *)__mptr - offsetof(type,member) );})
-
-/*
- * Simple doubly linked list implementation.
- *
- * Some of the internal functions ("__xxx") are useful when
- * manipulating whole lists rather than single entries, as
- * sometimes we already know the next/prev entries and we can
- * generate better code by using them directly rather than
- * using the generic single-entry routines.
- */
 
 /**
  * \struct list_head
