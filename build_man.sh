@@ -87,10 +87,9 @@ post_process(){
 
     {
       ! grep -Eq '^\.SS "Macros' $target || have_macros=true
-      remove_second_synopsis
-      $done_synopsis || del_modules
+      remove_first_synopsis
       fix_name_line
-      move_synopsis
+      $done_synopsis && move_synopsis
       del_empty_det_desc
       del_def_at_lines
       fix_double_blanks
@@ -245,14 +244,6 @@ del_empty_det_desc(){
 }
 
 move_synopsis(){
-  mygrep "SH SYNOPSIS" $target
-  [ $linnum -ne 0  ] || return 0
-  i=$linnum
-  # If this is a doxygen-created synopsis, leave it.
-  # (We haven't inserted our own one in the source yet)
-  mygrep "^\\.SS \"Functions" $target
-  [ $i -gt $linnum ] || return 0
-
   if $have_macros
   then
     ed -s $target <<////
@@ -305,24 +296,13 @@ wq
   rm ../$target.tmp
 }
 
-# Prior to doxygen 1.8.20 there was a "Modules" entry which became part of the
-# "bogus" synopsis. Doxygen 1.11.0 replaces "Modules" with "Topics" still as
-# part of the "bogus" synopsis and so cleaned up by remove_second_synopsis().
-del_modules(){
-  grep -Eq '^\.SS "Modules' $target || return 0
-  ed -s $target <<////
-/^\\.SS \"Modules/,/^\\.SS \"Functions/-1d
-wq
-////
-}
-
-remove_second_synopsis(){
+remove_first_synopsis(){
+  # If the user has inserted a manonly synopsis with headers then we don't
+  # need the synopsis that doxygen created.
+  # Removing that synopsis has the side benefit that we get rid of any Topics
+  # that may be listed.
+  #
   [ $(grep -E 'SH SYNOPSIS' $target | wc -l) -eq 2 ] || return 0
-  #
-  # doxygen 1.8.20 inserts its own SYNOPSIS line but there is no mention
-  # in the documentation or git log what to do with it.
-  # So get rid of it
-  #
   ed -s $target <<////
 /SH SYNOPSIS/,/^\\.SS \"\(Functions\|Macros\)/-1d
 wq
