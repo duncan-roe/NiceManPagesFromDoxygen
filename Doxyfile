@@ -10,7 +10,14 @@ INPUT                  = /usr/src/NMPFD
 FILE_PATTERNS          = *.c *.h
 EXCLUDE_SYMBOLS        = list_head
 EXAMPLE_PATTERNS       = 
+
+# INPUT_FILTER to enable documentation of static inline functions
+# (typically found in header files).
+# Functions with names starting "__" are not documented,
+# to follow the convention that such functions are only
+# for internal library use.
 INPUT_FILTER           = "sed -E '/^static inline [^ ]* [^_]{2}/s/static //'"
+
 SOURCE_BROWSER         = YES
 ALPHABETICAL_INDEX     = NO
 SEARCHENGINE           = NO
