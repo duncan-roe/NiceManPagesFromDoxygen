@@ -234,7 +234,7 @@ void pktb_free(struct pkt_buff *pktb)
  * Do not use these functions. Instead, always use the mangle
  * function appropriate to the level at which you are working.
  * \n
- * pktb_mangle() uses all the below functions except _pktb_pull_, which is not
+ * pktb_mangle() uses all the below functions except pktb_pull(), which is not
  * used by anything.
  *
  * \manonly
