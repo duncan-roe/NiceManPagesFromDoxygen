@@ -10,8 +10,14 @@
 declare -A renamed_page
 done_synopsis=false
 have_macros=false
+have_functions=false
 real_pages=
 man_links=
+
+# Array of ed commands used to compact the synopsis.
+# Name chosen to be unique (to grep -w)
+for ((i=8;i>=0;i--)); do y[$i]=#; done
+y[9]=wq
 
 main(){
   set -e
@@ -86,7 +92,8 @@ post_process(){
     continue
 
     {
-      ! grep -Eq '^\.SS "Macros' $target || have_macros=true
+      grep -Eq '^\.SS "Macros' $target && have_macros=true
+      grep -Eq '^\.SS "Functions' $target && have_functions=true
       remove_first_synopsis
       fix_name_line
       $done_synopsis && move_synopsis
@@ -246,22 +253,31 @@ del_empty_det_desc(){
 move_synopsis(){
   if $have_macros
   then
-    ed -s $target <<////
-/^\\.SS \"Macros\"/;.#
-.ka
-/^\\.SH SYNOPSIS/;/^[[:space:]]*\$/-1m'a-1
-/\"Macro Definition Documentation\"/-1;.d
-wq
-////
+    y[0]='/^\.SS "Macros"/;.d'
+    y[1]=.ka
+    y[2]='/^\.SH SYNOPSIS/;/^[[:space:]]*$/-1m'\''a-1'
+    y[3]='/"Macro Definition Documentation"/-1;.d'
+
+    # need to delete 4 lines if we have functions as well
+    $have_functions && y[4]='/^\.SS "Functions"/;.-1,.+2d'
   else
-    ed -s $target <<////
-/^\\.SS \"Functions\"/;.d
-.ka
-/^\\.SH SYNOPSIS/;/^[[:space:]]*\$/-1m'a-1
-/\"Function Documentation\"/-1;.d
-wq
-////
+    y[5]='/^\.SS "Functions"/;.d'
+    y[6]=.ka
+    y[7]='/^\.SH SYNOPSIS/;/^[[:space:]]*$/-1m'\''a-1'
+    y[8]='/"Function Documentation"/-1;.d'
   fi
+  ed -sv $target <<////
+${y[0]}
+${y[1]}
+${y[2]}
+${y[3]}
+${y[4]}
+${y[5]}
+${y[6]}
+${y[7]}
+${y[8]}
+${y[9]}
+////
 }
 
 fix_name_line(){
