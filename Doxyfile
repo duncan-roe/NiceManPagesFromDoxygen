@@ -1,27 +1,27 @@
 # Difference with default Doxyfile 1.11.0
-PROJECT_NAME           = "Nice Man Pages From Doxygen"
-PROJECT_NUMBER         = 0.1
-ABBREVIATE_BRIEF       =
-OUTPUT_DIRECTORY       = .
-TAB_SIZE               = 2
-OPTIMIZE_OUTPUT_FOR_C  = YES
-QUIET                  = YES
-INPUT                  = /usr/src/NMPFD
-FILE_PATTERNS          = *.c *.h
-EXCLUDE_SYMBOLS        = list_head
-EXAMPLE_PATTERNS       = 
+PROJECT_NAME = "Nice Man Pages From Doxygen"
+PROJECT_NUMBER = 0.1
+ABBREVIATE_BRIEF =
+OUTPUT_DIRECTORY = .
+TAB_SIZE = 2
+OPTIMIZE_OUTPUT_FOR_C = YES
+QUIET = YES
+INPUT = /usr/src/NMPFD
+FILE_PATTERNS = *.c *.h
+EXCLUDE_SYMBOLS = list_head
+EXAMPLE_PATTERNS =
 
 # INPUT_FILTER to enable documentation of static inline functions
 # (typically found in header files).
 # Functions with names starting "__" are not documented,
 # to follow the convention that such functions are only
 # for internal library use.
-INPUT_FILTER           = "sed -E '/^static inline [^ ]* [^_]{2}/s/static //'"
+INPUT_FILTER = "sed -E '/^static inline [^ ]* [^_]{2}/s/static //'"
 
-SOURCE_BROWSER         = YES
-ALPHABETICAL_INDEX     = NO
-SEARCHENGINE           = NO
-GENERATE_LATEX         = NO
-GENERATE_MAN           = YES
-MAN_LINKS              = YES
-QUIET                  = YES
+SOURCE_BROWSER = YES
+ALPHABETICAL_INDEX = NO
+SEARCHENGINE = NO
+GENERATE_LATEX = NO
+GENERATE_MAN = YES
+MAN_LINKS = YES
+QUIET = YES
