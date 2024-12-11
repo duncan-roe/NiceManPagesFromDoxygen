@@ -101,9 +101,6 @@ post_process(){
       del_def_at_lines
       fix_double_blanks
       [ $# -ne 2 ] || insert_see_also $@
-
-      # Fix rendering of verbatim "\n" (in code snippets)
-      sed -i 's/\\n/\\\\n/' $target
     }&
 
   done
