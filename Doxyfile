@@ -9,6 +9,7 @@ QUIET = YES
 INPUT = /usr/src/NMPFD
 FILE_PATTERNS = *.c *.h
 EXCLUDE_SYMBOLS = list_head
+EXAMPLE_PATH = Doxyfile
 EXAMPLE_PATTERNS =
 
 # INPUT_FILTER to enable documentation of static inline functions
