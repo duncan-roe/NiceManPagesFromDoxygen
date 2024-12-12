@@ -159,6 +159,9 @@ static inline void list_del(struct list_head *entry)
  * list_empty - tests whether a list is empty
  * \param head: the list to test.
  * \return 1 if list is empty, 0 otherwise
+ * \verbatim
+	printf("This code snippet tests whether double quotes become single (bug)\n");
+\endverbatim
  */
 static inline int list_empty(const struct list_head *head)
 {
