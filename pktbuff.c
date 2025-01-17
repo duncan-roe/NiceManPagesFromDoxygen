@@ -232,9 +232,8 @@ void pktb_free(struct pkt_buff *pktb)
  * \defgroup do_not_use Internal functions
  *
  * Do not use these functions. Instead, always use the mangle
- * function appropriate to the level at which you are working.
- * \n
- * pktb_mangle() uses all the below functions except pktb_pull(), which is not
+ * function appropriate to the level at which you are working.\n
+pktb_mangle() uses all the below functions except pktb_pull(), which is not
  * used by anything.
  *
  * \manonly
