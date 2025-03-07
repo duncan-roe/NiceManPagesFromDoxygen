@@ -20,3 +20,124 @@ Replace each other *item*.3 page that references the <ins>original</ins> page wi
   + If the source browser is on, remove the line starting `Definition at line` from each item.
   + Delete potential double blank lines (only needed for old versions of **man**(1)).
   + **If** the user created a man7 page, insert a **See Also** entry for it. 
+## Example
+This Doxygen-generated man page
+<pre>
+do_not_use(3)              Library Functions Manual              do_not_use(3)
+
+<b>NAME</b>
+       do_not_use - Internal functions
+
+<b>SYNOPSIS</b>
+   <b>Functions</b>
+       void <b>pktb_push</b> (struct pkt_buff *pktb, unsigned int len)
+       void <b>pktb_pull</b> (struct pkt_buff *pktb, unsigned int len)
+       void <b>pktb_put</b> (struct pkt_buff *pktb, unsigned int len)
+       void <b>pktb_trim</b> (struct pkt_buff *pktb, unsigned int len)
+
+<b>Detailed</b> <b>Description</b>
+       Do not use these functions. Instead, always use the mangle function
+       appropriate to the level at which you are working.
+       <b>pktb_mangle()</b> uses all the below functions except <b>pktb_pull()</b>, which
+       is not used by anything.
+
+<b>Function</b> <b>Documentation</b>
+   <b>void</b> <b>pktb_pull</b> <b>(struct</b> <b>pkt_buff</b> <b>*</b> <b>pktb,</b> <b>unsigned</b> <b>int</b> <b>len)</b>
+       pktb_pull - increment pointer to packet buffer
+
+       <b>Parameters</b>
+           <u>pktb</u> Pointer to userspace packet buffer
+           <u>len</u> Number of bytes to add to packet start address
+
+       Definition at line <b>269</b> of file <b>pktbuff.c</b>.
+
+   <b>void</b> <b>pktb_push</b> <b>(struct</b> <b>pkt_buff</b> <b>*</b> <b>pktb,</b> <b>unsigned</b> <b>int</b> <b>len)</b>
+       pktb_push - decrement pointer to packet buffer
+
+       <b>Parameters</b>
+           <u>pktb</u> Pointer to userspace packet buffer
+           <u>len</u> Number of bytes to subtract from packet start address
+
+       Definition at line <b>257</b> of file <b>pktbuff.c</b>.
+
+   <b>void</b> <b>pktb_put</b> <b>(struct</b> <b>pkt_buff</b> <b>*</b> <b>pktb,</b> <b>unsigned</b> <b>int</b> <b>len)</b>
+       pktb_put - add extra bytes to the tail of the packet buffer
+
+       <b>Parameters</b>
+           <u>pktb</u> Pointer to userspace packet buffer
+           <u>len</u> Number of bytes to add to packet tail (and length)
+
+       Definition at line <b>281</b> of file <b>pktbuff.c</b>.
+
+   <b>void</b> <b>pktb_trim</b> <b>(struct</b> <b>pkt_buff</b> <b>*</b> <b>pktb,</b> <b>unsigned</b> <b>int</b> <b>len)</b>
+       pktb_trim - set new length for this packet buffer
+
+       <b>Parameters</b>
+           <u>pktb</u> Pointer to userspace packet buffer
+           <u>len</u> New packet length (tail is adjusted to reflect this)
+
+       Definition at line <b>292</b> of file <b>pktbuff.c</b>.
+
+<b>Author</b>
+       Generated automatically by Doxygen for Nice Man Pages From Doxygen from
+       the source code.
+
+Nice Man Pages From Doxygen       Version 0.1                    do_not_use(3)
+</pre>
+Changes to:
+<pre>
+do_not_use(3)              Library Functions Manual              do_not_use(3)
+
+<b>NAME</b>
+       pktb_push, pktb_pull, pktb_put, pktb_trim - Internal functions
+
+<b>SYNOPSIS</b>
+       <b>#include</b> <b>&lt;libmnl/libmnl.h&gt;</b>
+       <b>#include</b> <b>&lt;libnetfilter_queue/pktbuff.h&gt;</b>
+
+       void <b>pktb_push</b> (struct pkt_buff *pktb, unsigned int len)
+       void <b>pktb_pull</b> (struct pkt_buff *pktb, unsigned int len)
+       void <b>pktb_put</b> (struct pkt_buff *pktb, unsigned int len)
+       void <b>pktb_trim</b> (struct pkt_buff *pktb, unsigned int len)
+
+<b>Detailed</b> <b>Description</b>
+       Do not use these functions. Instead, always use the mangle function
+       appropriate to the level at which you are working.
+        <b>pktb_mangle()</b> uses all the below functions except <b>pktb_pull()</b>, which
+       is not used by anything.
+
+<b>Function</b> <b>Documentation</b>
+   <b>void</b> <b>pktb_pull</b> <b>(struct</b> <b>pkt_buff</b> <b>*</b> <b>pktb,</b> <b>unsigned</b> <b>int</b> <b>len)</b>
+       pktb_pull - increment pointer to packet buffer
+
+       <b>Parameters</b>
+           <u>pktb</u> Pointer to userspace packet buffer
+           <u>len</u> Number of bytes to add to packet start address
+
+   <b>void</b> <b>pktb_push</b> <b>(struct</b> <b>pkt_buff</b> <b>*</b> <b>pktb,</b> <b>unsigned</b> <b>int</b> <b>len)</b>
+       pktb_push - decrement pointer to packet buffer
+
+       <b>Parameters</b>
+           <u>pktb</u> Pointer to userspace packet buffer
+           <u>len</u> Number of bytes to subtract from packet start address
+
+   <b>void</b> <b>pktb_put</b> <b>(struct</b> <b>pkt_buff</b> <b>*</b> <b>pktb,</b> <b>unsigned</b> <b>int</b> <b>len)</b>
+       pktb_put - add extra bytes to the tail of the packet buffer
+
+       <b>Parameters</b>
+           <u>pktb</u> Pointer to userspace packet buffer
+           <u>len</u> Number of bytes to add to packet tail (and length)
+
+   <b>void</b> <b>pktb_trim</b> <b>(struct</b> <b>pkt_buff</b> <b>*</b> <b>pktb,</b> <b>unsigned</b> <b>int</b> <b>len)</b>
+       pktb_trim - set new length for this packet buffer
+
+       <b>Parameters</b>
+           <u>pktb</u> Pointer to userspace packet buffer
+           <u>len</u> New packet length (tail is adjusted to reflect this)
+
+<b>Author</b>
+       Generated automatically by Doxygen for Nice Man Pages From Doxygen from
+       the source code.
+
+Nice Man Pages From Doxygen       Version 0.1                    do_not_use(3)
+</pre>
